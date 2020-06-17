@@ -3,7 +3,13 @@ using Logika;
 
 namespace Logika
 {
-     public static class Class1
+    public enum OpcjeMenu
+    {
+        Rozpocznij,
+        Zasady,
+        Zakończ,
+    }
+    public static class Class1
     {
         public static void MojeMenu()
         {
@@ -20,10 +26,14 @@ namespace Logika
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("(Naciśnij (1-3) aby rozpocząć działania)");
                 Console.ResetColor();
+                Console.ResetColor();
                 Console.WriteLine("-------------------------------------------");
-                Console.WriteLine("\t1-Rozpocznij grę");
-                Console.WriteLine("\t2-Zasady gry");
-                Console.WriteLine("\t3-Zakończ");
+                OpcjeMenu opcja1 = OpcjeMenu.Rozpocznij;
+                Console.WriteLine($"\t1-" + opcja1);
+                OpcjeMenu opcja2 = OpcjeMenu.Zasady;
+                Console.WriteLine($"\t2-" + opcja2);
+                OpcjeMenu opcja3 = OpcjeMenu.Zakończ;
+                Console.WriteLine($"\t3-" + opcja3);
 
                 ConsoleKeyInfo klawisz = Console.ReadKey();
                 switch (klawisz.Key)
@@ -34,7 +44,7 @@ namespace Logika
                         break;
                     case ConsoleKey.D2:
                         Console.Clear();
-                        WBudowie();
+                        ZasadyGry();
                         break;
                     case ConsoleKey.Escape:
                     case ConsoleKey.D3:
@@ -46,11 +56,27 @@ namespace Logika
                 }
             }
         }
+        static void ZasadyGry()
+        {
+            Console.WriteLine("----------------------------------------------------------------------------------------------\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\t\t\tZasady gry Kółko i Krzyżyk\n");
+            Console.ResetColor();
+            Console.WriteLine("----------------------------------------------------------------------------------------------\n");
+            Console.WriteLine("Gra toczy się na kwadratowej planszy (3x3) podzielonej na pola,");
+            Console.WriteLine("na której dwóch graczy naprzemiennie stawia symbole X albo O.");
+            Console.WriteLine("Nie można postawić symbolu na polu zajętym przez innego gracza,");
+            Console.WriteLine("a wygrywa ten kto pierwszy zajmie 3 pola w rzędzie(poziomo, pionowo lub na ukos)");
+            Console.WriteLine("W przypadku gdy nikt nie wygrał i zostały zajęte wszystkie pola na planszy, następuje remis.\n");
+            Console.WriteLine("----------------------------------------------------------------------------------------------");
+            Console.ReadKey();
+        }
         static void WBudowie()
         {
             Console.Write("puste");
             Console.ReadKey();
         }
-    }    
+
+    }
 }
 
