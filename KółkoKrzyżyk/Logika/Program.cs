@@ -48,7 +48,29 @@ namespace Logika
 
         static void PonowProbe()
         {
+            Console.Write("\nGracz {0}, Wybierz pole od 1 do 9: \n", gracz);
             int wybor = Convert.ToInt32(Console.ReadLine());
+            PodajRuch(wybor);
+        }
+        static void PodajRuch(int wybor)
+        {     //Deklaracja ruchu po tablicy (jeśli zajęte ponow)
+            int x = (wybor - 1) / 3;
+            int y = (wybor - 1) % 3;
+
+            if (tablica[x, y] == 0)
+            {
+                tablica[x, y] = gracz;
+                if (wygrana == 0)
+                {
+                    gracz = (gracz == 1) ? 2 : 1;
+                    ruch++;
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nPole zajęte, spróbuj ponownie");
+                PonowProbe();
+            }
         }
     }
 }
