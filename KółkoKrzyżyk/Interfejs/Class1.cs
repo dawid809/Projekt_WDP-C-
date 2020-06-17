@@ -9,13 +9,13 @@ namespace Logika
         Zasady,
         Zakończ,
     }
-    public static class Class1
+    public class Class1
     {
-        public static void MojeMenu()
+        public static void Main()
         {
-            Console.Title = "Menu";
+            Console.Title = "Menu Kółko i Krzyżyk";
             while (true)
-            {
+            {        //Tworzę menu w konsoli i dodaję 3 możliwe warianty 
                 Console.Clear();
                 Console.WriteLine("-------------------------------------------");
                 Console.ForegroundColor = ConsoleColor.Magenta;
@@ -35,12 +35,14 @@ namespace Logika
                 OpcjeMenu opcja3 = OpcjeMenu.Zakończ;
                 Console.WriteLine($"\t3-" + opcja3);
 
+                 // Przypisuje odpowiednie klawisze do poprzednich opcji
                 ConsoleKeyInfo klawisz = Console.ReadKey();
+
                 switch (klawisz.Key)
                 {
                     case ConsoleKey.D1:
                         Console.Clear();
-                        WBudowie();
+                        Program.StartGry();
                         break;
                     case ConsoleKey.D2:
                         Console.Clear();
@@ -52,10 +54,10 @@ namespace Logika
                         break;
                     default:
                         break;
-
                 }
             }
         }
+          //  Przetrzymuje informacje o zasadach Gry (2 opcja)
         static void ZasadyGry()
         {
             Console.WriteLine("----------------------------------------------------------------------------------------------\n");
@@ -71,12 +73,6 @@ namespace Logika
             Console.WriteLine("----------------------------------------------------------------------------------------------");
             Console.ReadKey();
         }
-        static void WBudowie()
-        {
-            Console.Write("puste");
-            Console.ReadKey();
-        }
-
     }
 }
 
