@@ -26,6 +26,13 @@ namespace Logika
                 PokazTablice();
                 PonowProbe();
             }
+            //Po zakończeniu gry pokaż ostateczną planszę i komunikat o wyniku
+            PokazTablice();
+            Console.ForegroundColor = ConsoleColor.Green;
+            if (wygrana == 1) Console.WriteLine("\nZwycięstwo! Gratulacje dla gracza {0}.\n", gracz);
+            else Console.WriteLine("\nRemis.");
+            Console.ResetColor();
+            Console.ReadLine();
 
         }
                  // Tworzenie obkietów w mojej tablicy 
@@ -34,15 +41,20 @@ namespace Logika
             string znak;
             for (int x = 0; x < 3; x++)
             {
+                
                 for (int y = 0; y < 3; y++)
                 {
                     znak = "   ";
                     if (tablica[x, y] != 0) znak = (tablica[x, y] == 1) ? " X " : " O ";
                     Console.Write(znak);
+                    Console.ForegroundColor = ConsoleColor.Green;
                     if (y < 2) Console.Write("|");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
                 if (x < 2) Console.WriteLine("-----------");
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
 
@@ -60,6 +72,7 @@ namespace Logika
             if (tablica[x, y] == 0)
             {
                 tablica[x, y] = gracz;
+                SprawdzWygrana();
                 if (wygrana == 0)
                 {
                     gracz = (gracz == 1) ? 2 : 1;
@@ -70,6 +83,36 @@ namespace Logika
             {
                 Console.WriteLine("\nPole zajęte, spróbuj ponownie");
                 PonowProbe();
+            }
+        }
+        static void SprawdzWygrana()
+        {
+            //Sprawdza warunki wygranej (wiersze, kolumny oraz przekątne)
+            for (int x = 0; x < 3; x++)
+            {
+                if (tablica[x, 0] > 0 && tablica[x, 0] == tablica[x, 1] && tablica[x, 1] == tablica[x, 2])
+                {
+                    wygrana = 1;
+                    return;
+                }
+            }
+            for (int y = 0; y < 3; y++)
+            {
+                if (tablica[0, y] > 0 && tablica[0, y] == tablica[1, y] && tablica[1, y] == tablica[2, y])
+                {
+                    wygrana = 1;
+                    return;
+                }
+            }
+            if (tablica[0, 0] > 0 && tablica[0, 0] == tablica[1, 1] && tablica[1, 1] == tablica[2, 2])
+            {
+                wygrana = 1;
+                return;
+            }
+            if (tablica[2, 0] > 0 && tablica[2, 0] == tablica[1, 1] && tablica[1, 1] == tablica[0, 2])
+            {
+                wygrana = 1;
+                return;
             }
         }
     }
